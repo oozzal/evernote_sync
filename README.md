@@ -22,15 +22,6 @@ Or install it yourself as:
   * Sync selected: `esync <category>`
     + `category`: `notes, scripts, links`
 
-## Code
-```ruby
-class Person
-  def hello
-    puts 'hello'
-  end
-end
-```
-
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/evernote_sync/fork )
