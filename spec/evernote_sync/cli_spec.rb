@@ -3,15 +3,17 @@ require 'support/fake_web'
 require 'support/capture'
 
 describe EvernoteSync::CLI do
+  let(:key) { 'abc' }
+  let(:storage) { EvernoteSync::Storage }
+  let(:config) { EvernoteSync::Config }
+  let(:client) { EvernoteSync::Client.new key }
+
   describe '#setup' do
-    let(:storage) { EvernoteSync::Storage }
-    let(:config) { EvernoteSync::Config }
-    let(:key) { 'abc' }
     let(:output) { capture(:stdout) { subject.setup } }
 
     context 'when key does not exist' do
       before do
-        allow(storage).to receive(:get_key).and_return false
+        allow(storage).to receive(:key_exists?).and_return false
         expect(subject).to receive(:nice_say).with(config::MSG[:setup][:success], config::COLORS[:success])
       end
 
@@ -45,7 +47,7 @@ describe EvernoteSync::CLI do
 
     context 'when key exists' do
       before do
-        allow(storage).to receive(:get_key).and_return key
+        allow(storage).to receive(:key_exists?).and_return true
       end
 
       context 'when user does not want to replace the key' do
@@ -80,6 +82,39 @@ describe EvernoteSync::CLI do
       end
     end
 
+  end
+
+  describe '#search' do
+    let(:output) { capture(:stdout) { subject.search } }
+    let(:query) { 'unread' }
+
+    context 'when setup is not complete' do
+      before do
+        allow(subject).to receive(:is_setup_ok?).and_return false
+      end
+
+      it 'alerts setup incomplete' do
+        expect(subject).to receive(:nice_say).with(config::MSG[:setup][:incomplete], config::COLORS[:danger])
+        subject.search query
+      end
+    end
+
+    context 'when setup is complete' do
+      before do
+        allow(subject).to receive(:is_setup_ok?).and_return true
+        allow(subject).to receive(:get_client).and_return client
+      end
+
+      context 'when searching for a tag' do
+        before { subject.options = {tag: 'unread'} }
+
+        it 'builds the tag query and performs search' do
+          built_query = "tag:#{query}"
+          expect(client).to receive(:search).with(built_query)
+          subject.search query
+        end
+      end
+    end
   end
 end
 

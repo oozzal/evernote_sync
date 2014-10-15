@@ -13,7 +13,8 @@ module EvernoteSync
     MSG = {
       setup: {
         success: 'Key setup successful',
-        replace: 'Key replaced'
+        replace: 'Key replaced',
+        incomplete: 'Setup not completed. Run "esync setup" first.'
       }
     }
 

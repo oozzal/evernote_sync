@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'thor'
+gem 'evernote-thrift'
 
 group :development, :test do
   gem 'pry'

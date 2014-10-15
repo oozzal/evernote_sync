@@ -4,6 +4,10 @@ module EvernoteSync
   module Storage
     extend self
 
+    def key_exists?
+      get_key != false
+    end
+
     def get_key
       File.read(Config::KEY_PATH) rescue false
     end
