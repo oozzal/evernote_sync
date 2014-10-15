@@ -1,4 +1,4 @@
-# EvernoteSync ( In Progress )
+# EvernoteSync ( In Progress ) [![Build Status](https://travis-ci.org/oozzal/evernote_sync.svg?branch=master)](https://travis-ci.org/oozzal/evernote_sync) [![Code Climate](https://codeclimate.com/github/oozzal/evernote_sync/badges/gpa.svg)](https://codeclimate.com/github/oozzal/evernote_sync)
 
 Sync `notes`, `scripts` and `urls` across machines. Mark them as synced.
 

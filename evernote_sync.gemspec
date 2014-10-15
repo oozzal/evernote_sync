@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = EvernoteSync::VERSION
   spec.authors       = ["oozzal"]
   spec.email         = ["theoozzal@gmail.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{A command-line tool to sync notes, scripts and urls across machines.}
+  spec.description   = %q{Additionally, the syncables can be marked/un-marked as synced.}
+  spec.homepage      = "https://github.com/oozzal/evernote_sync"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
